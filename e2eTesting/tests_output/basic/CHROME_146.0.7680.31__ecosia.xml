@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="1">
+
+  <testsuite name="Ecosia.org Demo" id="basic.ecosia"
+    errors="0" failures="1" hostname="" package="basic" skipped="0"
+    tests="1" time="7.391" timestamp="">
+  
+    <testcase name="Demo test ecosia.org" classname="Ecosia.org Demo" time="5.527" assertions="3">
+
+    
+
+      <failure message="Testing if element &lt;input[type=search]&gt; is visible in 5000ms - expected &#34;is visible&#34; but got: &#34;element could not be located&#34; (5323ms)">    at DescribeInstance.&lt;anonymous&gt; (C:\Users\izzym\OneDrive - King&#39;s College London\year 3\dissertation\e2eTesting\nightwatch\examples\basic\ecosia.js:8:15)</failure>
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>
