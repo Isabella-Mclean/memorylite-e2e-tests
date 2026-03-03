@@ -5,14 +5,14 @@
 
   <testsuite name="HomePage Assertion" id="MemoryLite.homePageTest"
     errors="0" failures="0" hostname="" package="homePageTest" skipped="0"
-    tests="2" time="5.443" timestamp="">
+    tests="2" time="10.51" timestamp="">
   
-    <testcase name="tests title of the page" classname="HomePage Assertion" time="1.670" assertions="1">
+    <testcase name="tests title of the page" classname="HomePage Assertion" time="2.428" assertions="1">
 
     
     </testcase>
   
-    <testcase name="test sign in button redirects to sign in page" classname="HomePage Assertion" time="3.772" assertions="3">
+    <testcase name="test sign in button redirects to sign in page" classname="HomePage Assertion" time="8.083" assertions="3">
 
     
 

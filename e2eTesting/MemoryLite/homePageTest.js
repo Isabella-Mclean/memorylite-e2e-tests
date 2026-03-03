@@ -7,7 +7,7 @@ describe('HomePage Assertion', function() {
   });
 
 
-  it('tests title of the page', function(browser) {
+  it('tests title of the home page', function(browser) {
     browser.assert.titleEquals('Home Page | MemoryLite');
   });
 
