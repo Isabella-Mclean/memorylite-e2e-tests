@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="5">
+
+  <testsuite name="UserHomePage Assertions" id="MemoryLite.userHomePageTest"
+    errors="0" failures="0" hostname="" package="userHomePageTest" skipped="0"
+    tests="5" time="32.57" timestamp="">
+  
+    <testcase name="test clicking Add redirects users to create a new entry" classname="UserHomePage Assertions" time="4.621" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="test clicking a presaved entry displays view or delete options" classname="UserHomePage Assertions" time="5.814" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="test clicking the view/edit button redirects to the edit entry (add) page" classname="UserHomePage Assertions" time="5.540" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="test user can save edits to a presaved entry" classname="UserHomePage Assertions" time="8.229" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="test clicking the delete button decrements the number of entries" classname="UserHomePage Assertions" time="8.357" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>

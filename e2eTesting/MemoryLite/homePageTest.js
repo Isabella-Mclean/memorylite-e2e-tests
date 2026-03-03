@@ -1,5 +1,5 @@
 
-describe('HomePage Assertion', function() {
+describe('HomePage Assertions', function() {
     
   beforeEach(function (browser) {
 
