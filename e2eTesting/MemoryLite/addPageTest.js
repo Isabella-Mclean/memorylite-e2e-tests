@@ -14,54 +14,70 @@ describe('AddPage Assertions', function() {
 
   });
 
-  //HAVEN'T TESTED YET SINCE THE API IS NOT WORKING
-  //test may fail if run within 30 seconds of the previous test due to rate limiting on the API
-    it.skip('test clicking generate summary calls the API and produces the summary', function(browser) {
-        browser.useXpath();
-        //click the add button leading to the add entry page
-        browser.click("//button[.//text()[contains(.,'Add')]]");
+  //test may fail if repeatedly run within 30 seconds due to rate limiting on the API
+  it('test clicking generate summary produces the summary within 10 seconds and can be edited, but a new summary cannot be generated before 30 seconds', async function(browser) {
+    browser.useXpath();
+    //click the add button leading to the add entry page
+    browser.click("//button[.//text()[contains(.,'Add')]]");
 
-        //enter text in the main text field
-        browser.element.findByPlaceholderText('Title').sendKeys('Test Entry');
-        let longText = "test".repeat(100);
-        browser.element.findByPlaceholderText('Enter your text here...').sendKeys(longText);
-        browser.click("//button[.//text()[contains(.,'Generate summary')]]");
-        browser.useCss();
-        let summaryBox =  browser.element.findByPlaceholderText('Your summary will be displayed here.')
-        browser.waitUntil(() => {
-            return summaryBox.getValue().then((value) => {
-            return value.length > 0;
-            });
-        }, 10000, 'expected summary to be generated within 15 seconds');
-    });
+    //enter text in the main text field
+    browser.element.findByPlaceholderText('Title').sendKeys('Test Entry');
+    let longText = "test".repeat(100);
+    browser.element.findByPlaceholderText('Enter your text here...').sendKeys(longText);
+    browser.click("//button[.//text()[contains(.,'Generate summary')]]");
+    browser.useCss();
 
-    it('test adding a new entry and saving increases the number of saved entries', async function(browser) {
-        browser.useXpath();
-        //calculate current rows
-        const totalRows = await browser.element.findAll('tr[data-p-selectable-row="true"]').count();
+    await browser.waitUntil(async() => {
+      const value = await browser.element.findByPlaceholderText('Your summary will be displayed here.').getValue()
+      return value.length > 0;
+    }, 10000, 'expected summary to be generated within 10 seconds');
 
-        //click the add button leading to the add entry page
-        browser.click("//button[.//text()[contains(.,'Add')]]");
+    //Assert the summary box is populated
+    const summaryValue = await browser.element.findByPlaceholderText('Your summary will be displayed here.').getValue();
+    assert.equal(summaryValue.length > 0, true);
 
-        //enter text in the main text field and mock summary field
-        browser.element.findByPlaceholderText('Title').sendKeys('Test Entry');
-        let longText = "test".repeat(100);
-        browser.element.findByPlaceholderText('Enter your text here...').sendKeys(longText);
-        browser.element.findByPlaceholderText('Your summary will be displayed here.').sendKeys(longText);
+    //assert the user can edit the summary box after text is generated
+    let summaryBox = await browser.element.findByPlaceholderText('Your summary will be displayed here.');
+    browser.sendKeys(summaryBox, 'additional text');
+    const updatedSummaryValue = await browser.element.findByPlaceholderText('Your summary will be displayed here.').getValue();
+    assert.equal(updatedSummaryValue, summaryValue + 'additional text');
 
-        //click save
-        browser.executeScript('window.scrollTo(0,document.body.scrollHeight);');
-        browser.click("//button[.//text()[contains(.,'Save')]]");
-        browser.useCss();
+    //assert you must wait 30 seconds before generating a new summary
+    browser.useXpath();
+    browser.click("//button[.//text()[contains(.,'Generate summary')]]");
+    browser.useCss();
 
-        //assert the number of rows has increased by 1
-        await browser.waitForElementVisible(
-            'tr[data-p-selectable-row="true"]',
-            5000
-        );
-        let newRows = await browser.element.findAll('tr[data-p-selectable-row="true"]').count();
-        assert.equal(totalRows + 1, newRows);
-    });
+    browser.assert.textContains('body', "You can only generate a summary once every 30 seconds. Please try again later.");
+  });
+
+
+  it('test adding a new entry and saving increases the number of saved entries', async function(browser) {
+    browser.useXpath();
+    //calculate current rows
+    const totalRows = await browser.element.findAll('tr[data-p-selectable-row="true"]').count();
+
+    //click the add button leading to the add entry page
+    browser.click("//button[.//text()[contains(.,'Add')]]");
+
+    //enter text in the main text field and mock summary field
+    browser.element.findByPlaceholderText('Title').sendKeys('Test Entry');
+    let longText = "test".repeat(100);
+    browser.element.findByPlaceholderText('Enter your text here...').sendKeys(longText);
+    browser.element.findByPlaceholderText('Your summary will be displayed here.').sendKeys(longText);
+
+    //click save
+    browser.executeScript('window.scrollTo(0,document.body.scrollHeight);');
+    browser.click("//button[.//text()[contains(.,'Save')]]");
+    browser.useCss();
+
+    //assert the number of rows has increased by 1
+    await browser.waitForElementVisible(
+        'tr[data-p-selectable-row="true"]',
+        5000
+    );
+    let newRows = await browser.element.findAll('tr[data-p-selectable-row="true"]').count();
+    assert.equal(totalRows + 1, newRows);
+  });
 
   afterEach(function (browser) {
     browser.end();
