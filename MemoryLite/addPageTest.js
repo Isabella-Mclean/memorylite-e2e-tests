@@ -47,7 +47,7 @@ describe('AddPage Assertions', function() {
     browser.click("//button[.//text()[contains(.,'Generate summary')]]");
     browser.useCss();
 
-    browser.assert.textContains('body', "You can only generate a summary once every 30 seconds. Please try again later.");
+    browser.assert.textContains('body', "You can only generate a summary once every 30 seconds. Please try again in");
   });
 
 
