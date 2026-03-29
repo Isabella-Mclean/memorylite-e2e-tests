@@ -58,7 +58,7 @@ describe('SignInPage Assertions', function() {
     //click sign in and sign up buttons
     browser.click('a[href*="SignInPage/Load"]');
     browser.useXpath();
-    browser.click("//button[.//text()[contains(.,'Sign Up')]]");
+    browser.click("//button[.//text()[contains(.,'Sign up')]]");
 
     //enter new user details and submit
     let newUsername = `testuser${Date.now()}`;
@@ -67,13 +67,13 @@ describe('SignInPage Assertions', function() {
     await browser.setValue("//zapptextbox[@name='UserNameTextBox']//input", newUsername);
     await browser.setValue("//zapptextbox[@name='EmailTextBox']//input", newEmail);
     await browser.setValue("//zapppassword[@name='PasswordTextBox']//input", newPassword);
-    browser.click("//button[.//text()[contains(.,'Sign Up')]]");
+    browser.click("//button[.//text()[contains(.,'Sign up')]]");
 
     browser.assert.urlContains('SignInPage/Load');
     //now sign in to test the credentials work
     await browser.setValue("//zapptextbox[@name='UserNameTextBox']//input", newUsername);
     await browser.setValue("//zapppassword[@name='PasswordTextBox']//input", newPassword);
-    browser.click("//button[.//text()[contains(.,'Log In')]]");
+    browser.click("//button[.//text()[contains(.,'Log in')]]");
 
     //assert redict to user home page after successful login
     browser.assert.urlContains('UserHome/Index');
