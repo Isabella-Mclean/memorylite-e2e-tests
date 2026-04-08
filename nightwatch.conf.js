@@ -36,7 +36,7 @@ module.exports = {
   test_settings: {
     default: {
       disable_error_log: false,
-      launch_url: 'https://apps.zappdev.io/MemoryLite_906_isabellamftr/HomePage/Render',
+      launch_url: 'https://earth.apps.zappdev.io/MemoryLite_906_isabellamftr',
 
       screenshots: {
         enabled: false,
