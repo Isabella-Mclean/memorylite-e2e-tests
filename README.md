@@ -7,3 +7,5 @@ Change the `.envTemplate` file to a `.env` file and add in credentials that you 
 Enter `npx nightwatch` to run all available tests
 
 Or enter  `npx nightwatch ./MemoryLite/<testFileName>.js` to run a specific test file
+
+Running the test files individually is preferred as this prevents some issues with tests overlapping and altering the data at different times, causing tests to fail.
